@@ -22,7 +22,7 @@ Project Organization
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
     ├── notebooks          <- Jupyter notebooks and notebook-like objects (e.g. .py files meant to
-    │                         run with vscode IPython)
+    │                         be run with vscode IPython)
     │
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials
     │
