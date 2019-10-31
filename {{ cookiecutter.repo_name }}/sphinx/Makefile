@@ -18,6 +18,7 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
+	@echo "  apidox      to autodocument modules and their content in src
 	@echo "  githubpages to make standalone HTML files to /docs for GitHub Pages"
 	@echo "  html        to make standalone HTML files"
 	@echo "  dirhtml     to make HTML files named index.html in directories"
@@ -41,6 +42,11 @@ help:
 
 clean:
 	-rm -rf $(BUILDDIR)/*
+
+apidox:
+	sphinx-apidoc -0 source ../src/
+	@echo
+	@echo "APIDOC finished. The files are in /docs/source"
 
 githubpages:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) ../docs
