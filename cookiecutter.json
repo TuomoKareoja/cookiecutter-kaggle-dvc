@@ -7,9 +7,5 @@
         "MIT",
         "BSD-3-Clause",
         "No license file"
-    ],
-    "python_interpreter": [
-        "python3",
-        "python"
     ]
 }
