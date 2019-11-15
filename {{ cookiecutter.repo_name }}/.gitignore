@@ -77,17 +77,13 @@ target/
 
 # exclude data from source control by default
 /data/raw/*
-/data/interim/*
 /data/predictions/*
 /data/processed/*
 /data/external/*
 !/data/raw/.gitkeep
-!/data/interim/.gitkeep
 !/data/predictions/.gitkeep
 !/data/processed/.gitkeep
 !/data/external/.gitkeep
-
-
 
 # Mac OS-specific storage files
 .DS_Store

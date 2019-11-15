@@ -82,7 +82,6 @@ class TestCookieSetup(object):
         expected_dirs = [
             "data",
             "data/external",
-            "data/interim",
             "data/processed",
             "data/raw",
             "docs",

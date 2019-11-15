@@ -33,6 +33,11 @@ else
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
 endif
 
+## Install Python Dependencies
+requirements:
+	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
+	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+
 ## Run tests in tests
 test:
 	py.test tests

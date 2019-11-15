@@ -45,7 +45,6 @@ The directory structure of your new project looks like this:
 ├── README.md          <- The top-level README for developers using this project
 ├── data
 │   ├── external       <- Data from third party sources
-│   ├── interim        <- Intermediate data that has been transformed
 │   ├── processed      <- The final, canonical data sets for modeling
 │   └── raw            <- The original, immutable data dump
 │
@@ -83,9 +82,19 @@ The directory structure of your new project looks like this:
 ```
 
 ### Installing development requirements
-------------
 
+1. Create enviroment
+------------
     make create_environment
+
+2. activate created environment with conda or virtualenv
+------------
+    conda activate cookiecutter-data-science
+    workon cookiecutter-data-science
+
+3. Install required packages
+------------
+    make requirements
 
 ### Running the tests
 ------------
