@@ -17,13 +17,8 @@ endif
 # COMMANDS                                                                      #
 #################################################################################
 
-## Install Python Dependencies
-requirements: test_environment
-	python -m pip install -U pip setuptools wheel
-	python -m pip install -r requirements.txt
-
 ## Make Dataset
-data: requirements
+data:
 	python src/data/make_dataset.py
 
 ## Delete all compiled Python files
@@ -39,26 +34,23 @@ lint:
 create_environment:
 ifeq (True,$(HAS_CONDA))
 	@echo ">>> Detected conda, creating conda environment."
-	conda create --name $(PROJECT_NAME) python=3
-endif
+	conda create --no-default-packages --yes --name $(PROJECT_NAME) python=3
 	@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
 else
-	python3 -m pip install -q virtualenv virtualenvwrapper
-	@echo ">>> Installing virtualenvwrapper if not already installed.\nMake sure the following lines are in shell startup file\n\
-	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
-	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=python3"
-	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
+	@echo ">>> Enviroment could not be created. Install conda first"
 endif
 
-## Test python environment is setup correctly
-test_environment:
-	python test_environment.py
-
-#################################################################################
-# PROJECT RULES                                                                 #
-#################################################################################
-
-
+## Install Python Dependencies
+requirements:
+ifeq (True,$(HAS_CONDA))
+	@echo ">>> Detected conda, updating activated conda environment."
+	conda env update --file environment.yml
+	# adding src-files to enviroment for easy importing
+	python -m pip install -e .
+	@echo ">>> Conda enviroment updated"
+else
+	@echo ">>> Environment could not be updated. Install conda first"
+endif
 
 #################################################################################
 # Self Documenting Commands                                                     #
