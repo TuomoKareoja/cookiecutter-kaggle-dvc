@@ -16,7 +16,7 @@ def featurize(
 ):
 
     test = clean_data.sample(frac=test_size, random_state=random_state)
-    train = test.drop(test.index)
+    train = clean_data.drop(test.index)
 
     # featurizing steps go here
     featurized_train = train
