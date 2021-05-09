@@ -88,10 +88,10 @@ def score(
 
     mean_squared_error_train = metrics.mean_squared_error(target_train, pred_train)
     mean_squared_error_test = metrics.mean_squared_error(target_test, pred_test)
-    mean_absolute_error_train = metrics.roc_auc_score(target_train, pred_train)
-    mean_absolute_error_test = metrics.roc_auc_score(target_test, pred_test)
-    r2_train = metrics.roc_auc_score(target_train, pred_train)
-    r2_test = metrics.roc_auc_score(target_test, pred_test)
+    mean_absolute_error_train = metrics.mean_absolute_error(target_train, pred_train)
+    mean_absolute_error_test = metrics.mean_absolute_error(target_test, pred_test)
+    r2_train = metrics.r2_score(target_train, pred_train)
+    r2_test = metrics.r2_score(target_test, pred_test)
 
     scores = {
         "train": {
