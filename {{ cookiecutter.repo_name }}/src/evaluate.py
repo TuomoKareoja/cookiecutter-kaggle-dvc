@@ -118,8 +118,8 @@ def score(
 def plot(residuals_path, target, pred, seed=seed):
 
     np.random.seed(seed)
-    # for bigger datasets we only show 5000 dots
-    sample_size = min(len(target), 5000)
+    # for bigger datasets we only show 2000 dots
+    sample_size = min(len(target), 2000)
     sample_idx = np.random.randint(sample_size, size=len(target)).astype('bool')
     target_sample = target[sample_idx]
     pred_sample = pred[sample_idx]
