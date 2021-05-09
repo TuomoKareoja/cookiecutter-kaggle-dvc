@@ -16,7 +16,7 @@ seed = yaml.safe_load(open("params.yaml"))["general"]["seed"]
 
 def predict(model, featurized_data):
 
-    predictions = model.predict_proba(featurized_data.drop(columns=["target"]))
+    predictions = model.predict(featurized_data.drop(columns=["target"]))
     {% if cookiecutter.problem_type == 'Classification' -%}
     predictions_proba = model.predict_proba(featurized_data.drop(columns=["target"]))
     {% endif -%}
