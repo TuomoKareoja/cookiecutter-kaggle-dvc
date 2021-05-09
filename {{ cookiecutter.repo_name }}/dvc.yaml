@@ -75,8 +75,8 @@ stages:
     params:
     - general.seed
     outs:
-    - data/prediction/predictions_train.csv
-    - data/prediction/predictions_test.csv
+    - data/predictions/predictions_train.csv
+    - data/predictions/predictions_test.csv
 
   evaluate:
     cmd: >
