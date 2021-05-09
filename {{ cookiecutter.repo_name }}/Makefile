@@ -23,8 +23,6 @@ endif
 
 run: ## Reprocess the needed steps with DVC dag
 	dvc repro --pull
-	
-plot: ## Show DVC plots
 	dvc plots show
 
 
