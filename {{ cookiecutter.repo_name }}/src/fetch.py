@@ -26,7 +26,7 @@ def main():
         sys.stderr.write("Arguments error. Usage:\n")
         sys.stderr.write("\tpython fetch.py raw-output-data\n")
         sys.exit(1)
-    raw_data_path = os.path.join("data", "clean", sys.argv[1])
+    raw_data_path = os.path.join("data", "raw", sys.argv[1])
 
     logger.info("Fetching raw data")
     raw_data = fetch_data()
