@@ -75,15 +75,32 @@ target/
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
 
-# exclude data from source control by default
+# exclude data from source control
 /data/raw/*
-/data/predictions/*
-/data/processed/*
-/data/external/*
 !/data/raw/.gitkeep
+!/data/raw/*.dvc
+
+/data/clean/*
+!/data/clean/.gitkeep
+!/data/clean/*.dvc
+
+/data/featurized/*
+!/data/featurized/.gitkeep
+!/data/featurized/*.dvc
+
+/data/predictions/*
 !/data/predictions/.gitkeep
-!/data/processed/.gitkeep
-!/data/external/.gitkeep
+!/data/predictions/*.dvc
+
+# exclude models from source control
+/models/*
+!/models/.gitkeep
+# TODO is the dvc needed in the model folder?
+!/models/*.dvc
+
+# Exclude notebook schetch folder
+/notebooks/private/*
+!/notebooks/private/.gitkeep
 
 # Mac OS-specific storage files
 .DS_Store

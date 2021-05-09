@@ -1,7 +1,8 @@
-docs/site/
-
 # OSX Junk
 .DS_Store
+
+# VS Code
+.vscode/
 
 # test cache
 .cache/*

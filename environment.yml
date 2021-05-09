@@ -1,0 +1,9 @@
+name: cookiecutter-data-science
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - cookiecutter
+  - pytest
+  - black
+  - flake8
