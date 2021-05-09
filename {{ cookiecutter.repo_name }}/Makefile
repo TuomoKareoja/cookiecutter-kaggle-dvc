@@ -1,4 +1,5 @@
-.PHONY: run clean lint init create_environment requirements
+.PHONY: run clean lint init create_env update_env help
+.DEFAULT_GOAL := help
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -17,30 +18,29 @@ endif
 # COMMANDS                                                                      #
 #################################################################################
 
-## reprocessed the needed steps in the defined DVC dag
-run:
+
+##@ Data processing
+
+run: ## Reprocess the needed steps with DVC dag
 	dvc repro --pull
 	
-## Show DVC plots
-plot:
+plot: ## Show DVC plots
 	dvc plots show
 
-## Delete all compiled Python files
-clean:
-	find . -type f -name "*.py[co]" -delete
-	find . -type d -name "__pycache__" -delete
 
-## Lint using flake8
-lint:
+##@ Testing
+
+lint: ## Lint using flake8
 	flake8 src
 
-## Initialize the project
-init:
+
+##@ Setup
+
+init: ## Initialize the project
 	git init
 	dvc init -q
 
-## Set up python interpreter environment
-create_environment:
+create_env: ## Create empty Conda enviroment
 ifeq (True,$(HAS_CONDA))
 	@echo ">>> Detected conda, creating conda environment."
 	conda create --no-default-packages --yes --name $(PROJECT_NAME) python=3
@@ -49,8 +49,7 @@ else
 	@echo ">>> Enviroment could not be created. Install conda first"
 endif
 
-## Install Python Dependencies
-requirements:
+update_env: ## Update activated Conda environment with enviroment.yml
 ifeq (True,$(HAS_CONDA))
 	@echo ">>> Detected conda, updating activated conda environment."
 	conda env update --file environment.yml
@@ -61,10 +60,12 @@ else
 	@echo ">>> Environment could not be updated. Install conda first"
 endif
 
-#################################################################################
-# Self Documenting Commands                                                     #
-#################################################################################
 
-.DEFAULT_GOAL := help
+##@ Helpers
 
-# TODO add better command
+help: ## Display this help
+	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+
+clean: ## Delete all compiled Python files
+	find . -type f -name "*.py[co]" -delete
+	find . -type d -name "__pycache__" -delete
