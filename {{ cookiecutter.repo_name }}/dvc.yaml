@@ -110,37 +110,45 @@ stages:
         cache: false
         x: recall
         y: precision
+        title: Train - Precision/Recall
     - prc_test.json:
         cache: false
         x: recall
         y: precision
+        title: Test - Precision/Recall
     - roc_train.json:
         cache: false
         x: fpr
         y: tpr
+        title: Train - ROC
     - roc_test.json:
         cache: false
         x: fpr
         y: tpr
+        title: Test - ROC
     - confusion_train.json:
         cache: false
         template: confusion
         x: prediction
         y: target
+        title: Train - Confusion Matrix
     - confusion_test.json:
         cache: false
         template: confusion
         x: prediction
         y: target
+        title: Test - Confusion Matrix
     {% elif cookiecutter.problem_type == 'Regression' -%}
     - residuals_train.json:
         cache: false
         template: scatter
         x: target
         y: prediction
+        title: Train - Residuals
     - residuals_test.json:
         cache: false
         template: scatter
         x: target
         y: prediction
+        title: Test - Residuals
     {% endif -%}
