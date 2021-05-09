@@ -15,19 +15,12 @@ def featurize(
     clean_data, test_size=params["test_size"], random_state=seed,
 ):
 
-    X = clean_data.drop(columns=["target"])
-    y = clean_data["target"]
-
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=test_size, random_state=random_state
-    )
+    test = clean_data.sample(frac=test_size, random_state=random_state)
+    train = test.drop(test.index)
 
     # featurizing steps go here
-    featurized_train = X_train
-    featurized_test = X_test
-
-    featurized_train["target"] = y_train
-    featurized_test["target"] = y_test
+    featurized_train = train
+    featurized_test = test
 
     return featurized_train, featurized_test
 
