@@ -2,7 +2,7 @@ stages:
 
   fetch:
     cmd: >
-      python src/fetch.py \
+      python src/fetch.py
       raw.csv
     deps:
     - src/fetch.py
@@ -13,8 +13,8 @@ stages:
 
   clean:
     cmd: >
-      python src/clean.py \
-      raw.csv \
+      python src/clean.py
+      raw.csv
       clean.csv
     deps:
     - src/clean.py
@@ -26,10 +26,10 @@ stages:
 
   featurize:
     cmd: >
-      python src/featurize.py \
-      clean.csv \
-      featurized_train.csv \
-      featurized_test.csv \
+      python src/featurize.py
+      clean.csv
+      featurized_train.csv
+      featurized_test.csv
     deps:
     - src/featurize.py
     - data/clean/clean.csv
@@ -42,8 +42,8 @@ stages:
 
   train:
     cmd: >
-      python train.py \
-      featurized_train.csv \
+      python train.py
+      featurized_train.csv
       catboost-model
     deps:
     - src/train.py
@@ -61,11 +61,11 @@ stages:
 
   predict:
     cmd: >
-      python src/predict.py \
-      catboost-model \
-      featurized_train.csv \
-      featurized_test.csv \
-      predictions_train.csv \
+      python src/predict.py
+      catboost-model
+      featurized_train.csv
+      featurized_test.csv
+      predictions_train.csv
       predictions_test.csv
     deps:
     - src/predict.py
@@ -80,19 +80,19 @@ stages:
 
   evaluate:
     cmd: >
-      python src/evaluate.py \
-      predictions_train.csv \
-      predictions_test.csv \
-      scores.json \
+      python src/evaluate.py
+      predictions_train.csv
+      predictions_test.csv
+      scores.json
       {% if cookiecutter.problem_type == 'Classification' -%}
-      pcr_train.json \
-      pcr_test.json \
-      roc_train.json \
-      roc_test.json \
-      confusion_train.json \
+      pcr_train.json
+      pcr_test.json
+      roc_train.json
+      roc_test.json
+      confusion_train.json
       confusion_test.json
       {% elif cookiecutter.problem_type == 'Regression' -%}
-      residuals_train.json \
+      residuals_train.json
       residuals_test.json
       {% endif %}
     deps:
