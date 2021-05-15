@@ -23,7 +23,6 @@ endif
 
 run: ## Reprocess the needed steps with DVC dag
 	dvc repro --pull
-	dvc plots show
 
 
 ##@ Testing
@@ -36,7 +35,18 @@ lint: ## Lint using flake8
 
 init: ## Initialize the project
 	git init
-	dvc init -q
+	dvc init --quiet
+	
+##@ Kaggle
+
+submit: ## Send submission to Kaggle
+	kaggle competitions submit --file data/predictions/filename
+submissions: ## Show Kaggle
+	kaggle competitions submissions {{ cookiecutter.kaggle_competition_name }}
+leader: ## Show top of the Kaggle leaderboard
+	kaggle competitions leaderboard --show
+fetch: ## downloads the competition data from Kaggle
+	kaggle datasets download {{ cookiecutter.kaggle_competition_name }} --path data/raw/
 
 create_env: ## Create empty Conda enviroment
 ifeq (True,$(HAS_CONDA))

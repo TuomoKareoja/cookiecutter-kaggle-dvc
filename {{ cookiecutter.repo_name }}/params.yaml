@@ -1,17 +1,5 @@
 general:
   seed: 42
 
-featurize:
-  test_size: 0.2
-
-train:
-  iterations: 1000
-  depth: 6
-  l2_leaf_reg: 3.0
-  random_strength: 1
-  bagging_temperature: 1
-  {% if cookiecutter.problem_type == 'Classification' -%}
-  loss_function: 'Logloss'
-  {% elif cookiecutter.problem_type == 'Regression' -%}
-  loss_function: 'RMSE'
-  {% endif -%}
+model_params:
+  example: 6

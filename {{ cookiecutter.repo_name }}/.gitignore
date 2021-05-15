@@ -92,15 +92,9 @@ target/
 !/data/predictions/.gitkeep
 !/data/predictions/*.dvc
 
-# exclude models from source control
-/models/*
-!/models/.gitkeep
-# TODO is the dvc needed in the model folder?
-!/models/*.dvc
-
-# Exclude notebook schetch folder
-/notebooks/private/*
-!/notebooks/private/.gitkeep
+/data/submissions/*
+!/data/submissions/.gitkeep
+!/data/submissions/*.dvc
 
 # Mac OS-specific storage files
 .DS_Store

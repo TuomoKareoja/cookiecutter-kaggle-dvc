@@ -4,9 +4,9 @@ channels:
   - conda-forge
 dependencies:
   - black
-  - catboost
   - dvc
   - flake8
+  - kaggle
   - jupyter
   - matplotlib
   - numpy
@@ -14,5 +14,3 @@ dependencies:
   - python-dotenv>=0.5.1
   - scikit-learn
   - seaborn
-  - Sphinx
-  - statsmodels

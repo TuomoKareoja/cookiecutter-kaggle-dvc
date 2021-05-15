@@ -1,154 +1,41 @@
 stages:
 
-  fetch:
-    cmd: >
-      python src/fetch.py
-      raw.csv
-    deps:
-    - src/fetch.py
-    params:
-    - general.seed
-    outs:
-    - data/raw/raw.csv
-
   clean:
     cmd: >
       python src/clean.py
-      raw.csv
-      clean.csv
     deps:
     - src/clean.py
-    - data/raw/raw.csv
+    - data/raw/
     params:
     - general.seed
     outs:
-    - data/clean/clean.csv
+    - data/clean/
 
   featurize:
     cmd: >
       python src/featurize.py
-      clean.csv
-      featurized_train.csv
-      featurized_test.csv
     deps:
     - src/featurize.py
-    - data/clean/clean.csv
-    params:
-    - general.seed
-    - featurize.test_size
-    outs:
-    - data/featurized/featurized_train.csv
-    - data/featurized/featurized_test.csv
-
-  train:
-    cmd: >
-      python train.py
-      featurized_train.csv
-      catboost-model
-    deps:
-    - src/train.py
-    - data/featurized/featurized_train.csv
-    params:
-    - general.seed
-    - train.iterations
-    - train.depth
-    - train.l2_leaf_reg
-    - train.random_strength
-    - train.bagging_temperature
-    - train.loss_function
-    outs:
-    - models/catboost-model
-
-  predict:
-    cmd: >
-      python src/predict.py
-      catboost-model
-      featurized_train.csv
-      featurized_test.csv
-      predictions_train.csv
-      predictions_test.csv
-    deps:
-    - src/predict.py
-    - models/catboost-model
-    - data/featurized/featurized_train.csv
-    - data/featurized/featurized_test.csv
+    - data/clean/
     params:
     - general.seed
     outs:
-    - data/predictions/predictions_train.csv
-    - data/predictions/predictions_test.csv
+    - data/featurized/
 
   evaluate:
     cmd: >
       python src/evaluate.py
-      predictions_train.csv
-      predictions_test.csv
-      scores.json
-      {% if cookiecutter.problem_type == 'Classification' -%}
-      pcr_train.json
-      pcr_test.json
-      roc_train.json
-      roc_test.json
-      confusion_train.json
-      confusion_test.json
-      {% elif cookiecutter.problem_type == 'Regression' -%}
-      residuals_train.json
-      residuals_test.json
-      {% endif %}
     deps:
     - src/evaluate.py
-    - data/predictions/predictions_train.csv
-    - data/predictions/predictions_test.csv
+    - data/featurized/
     params:
     - general.seed
-    metrics:
-    - scores.json:
-        cache: false
-    plots:
-    {% if cookiecutter.problem_type == 'Classification' -%}
-    - prc_train.json:
-        cache: false
-        x: recall
-        y: precision
-        title: Train - Precision/Recall
-    - prc_test.json:
-        cache: false
-        x: recall
-        y: precision
-        title: Test - Precision/Recall
-    - roc_train.json:
-        cache: false
-        x: fpr
-        y: tpr
-        title: Train - ROC
-    - roc_test.json:
-        cache: false
-        x: fpr
-        y: tpr
-        title: Test - ROC
-    - confusion_train.json:
-        cache: false
-        template: confusion
-        x: prediction
-        y: target
-        title: Train - Confusion Matrix
-    - confusion_test.json:
-        cache: false
-        template: confusion
-        x: prediction
-        y: target
-        title: Test - Confusion Matrix
-    {% elif cookiecutter.problem_type == 'Regression' -%}
-    - residuals_train.json:
-        cache: false
-        template: scatter
-        x: target
-        y: prediction
-        title: Train - Residuals
-    - residuals_test.json:
-        cache: false
-        template: scatter
-        x: target
-        y: prediction
-        title: Test - Residuals
-    {% endif -%}
+    outs:
+    - data/predictions/
+    - data/submissions/
+    # metrics:
+    # - scores.json:
+    #     cache: false
+    # plots:
+    # - metric1.json:
+    #     cache: false

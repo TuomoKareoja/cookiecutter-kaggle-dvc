@@ -6,47 +6,35 @@
 Project Organization
 ------------
 
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project
     ├── data
-    │   ├── external       <- Data from third party sources
-    │   ├── processed      <- The final, canonical data sets for modeling
-    │   └── raw            <- The original, immutable data dump
+    │   ├── clean          <- Cleaned datasets
+    │   ├── featurized     <- Featurized datasets
+    │   ├── predictions    <- Datasets with predictions included for exploration
+    │   ├── raw            <- The original, immutable data dump
+    │   └── submissions    <- Kaggle-ready submission files
     │
-    ├── docs               <- html docs for GitHub Pages
+    ├── notebooks
+    │   ├── presentation   <- Cleaned up notebooks for future reference
+    │   └── sketch         <- Working notebooks and messy tests
     │
-    ├── sphinx             <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks and notebook-like objects (e.g. .py files meant to
-    │                         be run with vscode IPython)
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── environment.yml    <- Conda environment file for reproducing the analysis environment
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │                     predictions
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
+    │   ├── misc           <- For functions used in exploration and testing
+    │   │   └─ __init__.py
+    │   ├── __init__.py
+    │   ├── clean          <- DVC script for cleaning the data
+    │   ├── evaluate       <- DVC script for evaluating, saving predictions, and creating a submission
+    │   └── featurize      <- DVC script for featurizing the cleaned data
     │
-    └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
-
+    ├── .dvcignore         <- Marks files for DVC to ignore
+    ├── .env               <- Non-tracked file for holding private passwords and keys
+    ├── .gitignore
+    ├── dvc.yaml           <- Defines DVC dag steps. These steps use the files on the root of src
+    ├── environment.yml    <- Conda environment file for reproducing the analysis environment
+    ├── LICENSE
+    ├── Makefile           <- Makefile with commands for setting up the project and running DVC
+    ├── params.yaml        <- Hyperparameters used in the DVC dag
+    ├── README.md
+    ├── setup.py           <- makes project pip installable (pip install -e .) so that src can be imported
+    └── setup.cfg          <- Python configuration file (e.g. Flake8)
 
 --------
-
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
