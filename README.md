@@ -24,8 +24,6 @@ $ conda install cookiecutter
 
     cookiecutter https://github.com/TuomoKareoja/cookiecutter-kaggle-dvc
 
-
-
 The resulting directory structure for your new project will look like this:
 
 ```
